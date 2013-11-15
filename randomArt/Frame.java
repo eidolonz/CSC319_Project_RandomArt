@@ -6,22 +6,23 @@ import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.BorderLayout;
  
 public class Frame extends JFrame{
   
   private Panel panel;
+  private int width;
+  private int height;
   boolean check;
   
-  public Frame(int width, int height){
-    createWelcomePopUp();
-    
-    
-  }
-  
   public Frame(){
-    this(500, 320);
+    createWelcomePopUp();
   }
     
   public void createFrame(int width, int height){
@@ -56,39 +57,92 @@ public class Frame extends JFrame{
     //add sub menu to about
     help.add("About");
     setJMenuBar(menu);
-    addButton();
+    addButton("Generate", "SOUTH");
   }
   
-  public void addButton(){
+  public void addButton(String s, String layout){
     //create button
     JPanel buttonPanel = new JPanel();
-    buttonPanel.add(new JButton("Generate!"));
-    add(buttonPanel, BorderLayout.SOUTH);
+    buttonPanel.add(new JButton(s));
+    if(layout == "SOUTH"){
+      add(buttonPanel, BorderLayout.SOUTH);
+    }else if(layout == "NORTH"){
+      add(buttonPanel, BorderLayout.NORTH);
+    }else if(layout == "EAST"){
+      add(buttonPanel, BorderLayout.EAST);
+    }else if(layout == "WEST"){
+      add(buttonPanel, BorderLayout.WEST);
+    }else{
+      add(buttonPanel, BorderLayout.CENTER);
+    }
   }
+  
+  public void addLabel(String s, String layout){
+    JLabel label = new JLabel(s);
+    if(layout == "NORTH"){
+      add(label, BorderLayout.NORTH);
+    }else if(layout == "SOUTH"){
+      add(label, BorderLayout.SOUTH);
+    }else if(layout == "EAST"){
+      add(label, BorderLayout.EAST);
+    }else if(layout == "WEST"){
+      add(label, BorderLayout.WEST);
+    }else{
+      add(label, BorderLayout.CENTER);
+    }
+  }
+  
+  
   
   public void createWelcomePopUp(){
     setTitle("RandomArtProject");
     setSize(320, 50);
     Container contentPanes = new Panel();
-    JLabel welcome = new JLabel("       Welcome! to Random-Art Beta v.2.2.27 ");
-    add(welcome, BorderLayout.CENTER);
+    JLabel label = new JLabel("       Welcome! to Random-Art Beta v.2.2.27 ");
+    add(label, BorderLayout.CENTER);
+    //setBackground(Color.BLUE);
     setVisible(true);
     
-    while(!check){
-      check = timeCounter(1);
-    }
+    //timeCheck(50);
     setVisible(false);
-    remove(welcome);
-    createFrame(320,320);
+    remove(label);
+    //createFrame(320,320);
+    //createWidthHeight();
+    createColorSelection();
     setVisible(true);
   }
   
-  public boolean timeCounter(int delay){
-    delay *= 99999999;
-    while(delay > -9999999){
-      delay--;
+  public void timeCheck(int check){
+    long time1 = System.currentTimeMillis();
+    long stop = 0;
+    while(stop >= check){
+      stop = (System.currentTimeMillis() - time1)/1000;
     }
-    return true;
+  }
+  
+ 
+  public void createWidthHeight(){
+    setSize(250, 125);
+    setLayout(new GridLayout(3,1));
+    JTextField text = new JTextField(5);
+    JTextField text2 = new JTextField(5);
+    
+    addLabel("Width: ", "WEST");
+    add(text);//,BorderLayout.EAST);
+    addLabel("Height: ", "WEST");
+    add(text2);//,BorderLayout.EAST);
+    addButton("Next","SOUTH");
+  }
+  
+  public void createColorSelection(){
+    setSize(250,125);
+    setLayout(new GridLayout(2,2));
+    JRadioButton color = new JRadioButton(" Random Color");
+    JRadioButton gray = new JRadioButton(" Random Gray");
+    add(color, BorderLayout.CENTER); 
+    add(gray, BorderLayout.CENTER);
+    addButton("Generate", "CENTER");
+    addButton("Back", "CENTER");
   }
   
   public void run(){
