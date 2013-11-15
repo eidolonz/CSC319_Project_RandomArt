@@ -1,21 +1,23 @@
-package randomArt;
+import javax.swing.Timer;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Container;
 import java.awt.BorderLayout;
  
 public class Frame extends JFrame{
   
   private Panel panel;
+  boolean check;
   
   public Frame(int width, int height){
-    createFrame(width, height);
+    createWelcomePopUp();
     
-    panel = new Panel();
-    add(panel, BorderLayout.CENTER);
+    
   }
   
   public Frame(){
@@ -28,6 +30,9 @@ public class Frame extends JFrame{
     setSize(width, height); // will change to use input later
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     createMenuBar();
+    
+    panel = new Panel();
+    add(panel, BorderLayout.CENTER);
   }
   
   public void createMenuBar(){
@@ -61,8 +66,33 @@ public class Frame extends JFrame{
     add(buttonPanel, BorderLayout.SOUTH);
   }
   
-  public void run(){
+  public void createWelcomePopUp(){
+    setTitle("RandomArtProject");
+    setSize(320, 50);
+    Container contentPanes = new Panel();
+    JLabel welcome = new JLabel("       Welcome! to Random-Art Beta v.2.2.27 ");
+    add(welcome, BorderLayout.CENTER);
     setVisible(true);
+    
+    while(!check){
+      check = timeCounter(1);
+    }
+    setVisible(false);
+    remove(welcome);
+    createFrame(320,320);
+    setVisible(true);
+  }
+  
+  public boolean timeCounter(int delay){
+    delay *= 99999999;
+    while(delay > -9999999){
+      delay--;
+    }
+    return true;
+  }
+  
+  public void run(){
+    //setVisible(true);
   }
   
 }
