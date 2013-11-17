@@ -1,4 +1,6 @@
 import javax.swing.Timer;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -103,6 +105,8 @@ public class Frame extends JFrame{
   
   
   
+  
+  
   public void createWelcomePopUp(){
     setTitle("RandomArtProject");
     setSize(320, 50);
@@ -128,6 +132,16 @@ public class Frame extends JFrame{
     while(stop >= check){
       stop = (System.currentTimeMillis() - time1)/1000;
     }
+  }
+  
+  private List<SizeList> createSize(){
+    List<SizeList> sizeList = new ArrayList<SizeList>();
+    sizeList.add(new SizeList(200, 200));
+    sizeList.add(new SizeList(320, 320));
+    sizeList.add(new SizeList(480, 480));
+    sizeList.add(new SizeList(800, 600));
+    sizeList.add(new SizeList(1280, 720));    
+    return sizeList;
   }
   
   public void createOption(){
@@ -161,6 +175,7 @@ public class Frame extends JFrame{
     sizeBox.add(widthText);
     sizeBox.add(height); 
     sizeBox.add(heightText);
+    widthText.setEnabled(false);
     sizeBox.setBorder(BorderFactory.createTitledBorder("Size"));
     addItem(panel1, sizeBox, 1, 3, 1, 1, GridBagConstraints.NORTH);   
     

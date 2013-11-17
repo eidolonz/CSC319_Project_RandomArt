@@ -1,0 +1,15 @@
+public class SizeList{
+  int width;
+  int height;
+  String name;
+  
+  public SizeList(){
+    this(200, 200);
+  }
+  
+  public SizeList(int width, int height){
+    this.width = width;
+    this.height = height;
+    this.name = width + " x " + height;
+  }
+}
