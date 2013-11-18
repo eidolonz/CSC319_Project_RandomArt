@@ -1,9 +1,19 @@
-CSC319_Project_RandomArt
+                                                  
+#CSC319_Project_RandomArt
+
+ <br><div align="center"><b>Welcome everyone to our OOP project. Hope you guys like it and Thank you so much for watching.</b></div></br>
  
- Welcome everyone to my project with my teamate "Mr. PeaPy" @eidolonz 
- called "Random Art"
-========================
- What is a random art?
-========================
+ created by: Mr.Peerapon Jumruswittayawong (Peapy) and Ms. Vipavee Mojanakul (Gigie) from SIT, KMUTT
+
+  
+                                                     
+
+#What is a random art?
  
- 
+  ...
+   
+
+#How it works?
+  ...
+  
+

@@ -1,4 +1,5 @@
 #BlueJ package file
+<<<<<<< HEAD
 dependency1.from=RandomArt
 dependency1.to=ArtFrame
 dependency1.type=UsesDependency
@@ -57,3 +58,7 @@ target4.type=ClassTarget
 target4.width=90
 target4.x=70
 target4.y=80
+=======
+#Mon Nov 18 01:26:08 ICT 2013
+project.charset=UTF-8
+>>>>>>> b2a39564c59569be467985510cfdae59021bd1f8
