@@ -1,5 +1,4 @@
 #BlueJ package file
-<<<<<<< HEAD
 dependency1.from=RandomArt
 dependency1.to=ArtFrame
 dependency1.type=UsesDependency
@@ -11,19 +10,20 @@ dependency3.to=ArtPanel
 dependency3.type=UsesDependency
 package.editor.height=400
 package.editor.width=560
-package.editor.x=201
-package.editor.y=158
+package.editor.x=13
+package.editor.y=226
 package.numDependencies=3
 package.numTargets=4
 package.showExtends=true
 package.showUses=true
 project.charset=UTF-8
-target1.editor.height=718
+target1.editor.height=714
 target1.editor.width=1280
 target1.editor.x=0
 target1.editor.y=22
 target1.height=50
 target1.name=ArtFrame
+target1.naviview.expanded=true
 target1.showInterface=false
 target1.type=ClassTarget
 target1.width=80
@@ -36,7 +36,7 @@ target2.type=ClassTarget
 target2.width=90
 target2.x=60
 target2.y=290
-target3.editor.height=718
+target3.editor.height=714
 target3.editor.width=1280
 target3.editor.x=0
 target3.editor.y=22
@@ -58,7 +58,3 @@ target4.type=ClassTarget
 target4.width=90
 target4.x=70
 target4.y=80
-=======
-#Mon Nov 18 01:26:08 ICT 2013
-project.charset=UTF-8
->>>>>>> b2a39564c59569be467985510cfdae59021bd1f8

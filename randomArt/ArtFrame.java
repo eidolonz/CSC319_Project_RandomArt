@@ -36,10 +36,7 @@ public class ArtFrame extends JFrame{
   private JTextField widthText;
   private JTextField heightText;
   private JPanel panel;
-<<<<<<< HEAD
   private JPanel thePanel;
-=======
->>>>>>> b2a39564c59569be467985510cfdae59021bd1f8
     
   String[] size = new String[6];
       
@@ -47,25 +44,19 @@ public class ArtFrame extends JFrame{
   //Constructor
   public ArtFrame(){
     randomPreference();
-<<<<<<< HEAD
     //thePanel = new ArtPanel();
-=======
->>>>>>> b2a39564c59569be467985510cfdae59021bd1f8
   }
   
   public void makePanel(int width, int height){
     frame = new JFrame();
     frame.setTitle("RandomArt");
-    frame.setSize(width, height);
+    frame.setSize(320, 320);
     
     makeMenuBar(frame);
     
-<<<<<<< HEAD
     thePanel = new ArtPanel();
     frame.add(thePanel);
     
-=======
->>>>>>> b2a39564c59569be467985510cfdae59021bd1f8
     //frame.pack();
     frame.setVisible(true);
   }
@@ -106,13 +97,8 @@ public class ArtFrame extends JFrame{
     heightText.setEnabled(status);
   }
   
-<<<<<<< HEAD
   private ArrayList<String> createSizeList(){
     ArrayList<String> sizeList = new ArrayList<String>();
-=======
-  private List<String> createSizeList(){
-    List<String> sizeList = new ArrayList<String>();
->>>>>>> b2a39564c59569be467985510cfdae59021bd1f8
     sizeList.add("Default: 200 x 200");
     sizeList.add("320, 320");
     sizeList.add("480, 480");
