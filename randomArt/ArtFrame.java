@@ -35,43 +35,47 @@ public class ArtFrame extends JFrame{
   private JLabel label;
   private JTextField widthText;
   private JTextField heightText;
-  private JPanel panel;
+  private JPanel preferencePanel;
   private JPanel thePanel;
     
-  String[] size = new String[6];
+  private int width, height;
+  private boolean color = true;
       
   
   //Constructor
   public ArtFrame(){
-    randomPreference();
-    //thePanel = new ArtPanel();
+    newArt();
   }
   
   public void makePanel(int width, int height){
     frame = new JFrame();
     frame.setTitle("RandomArt");
-    frame.setSize(320, 320);
     
     makeMenuBar(frame);
     
-    thePanel = new ArtPanel();
+    thePanel = new ArtPanel(320, 320, color);
     frame.add(thePanel);
     
-    //frame.pack();
+    frame.pack();
     frame.setVisible(true);
   }
     
-  private void generate(){
+  private void generate(int width, int height){
     setVisible(false);
-    makePanel(getWidth(), getHeight());
+    makePanel(width, height);
     remove(frame);
   }
+  private void generate(){
+    generate(this.width, this.height);
+    }
+  private void cancle(){
+    //remove(preferencePanel);
+    setVisible(false);
+  }
   
-  private void setDefault(){}
-  
-  private void cancle(){}
-  
-  private void newRandomArt(){}
+  private void newArt(){
+    makePreferencePanel();
+  }
   
   private void saveAs(){}
   
@@ -87,9 +91,10 @@ public class ArtFrame extends JFrame{
   private void about(){
     JOptionPane.showMessageDialog(frame, "RandomArt\nBeta Version 2.2.27", "AboutRandomArt", JOptionPane.INFORMATION_MESSAGE);
   }
+  private void printFunction(){}
   
-  private void randomPreference(){
-    makePreferencePanel();
+  private boolean getColor(){
+      return this.color;
   }
   
   private void setTextFieldEnabled(boolean status){
@@ -97,8 +102,8 @@ public class ArtFrame extends JFrame{
     heightText.setEnabled(status);
   }
   
-  private ArrayList<String> createSizeList(){
-    ArrayList<String> sizeList = new ArrayList<String>();
+  private List<String> createSizeList(){
+    List<String> sizeList = new ArrayList<String>();
     sizeList.add("Default: 200 x 200");
     sizeList.add("320, 320");
     sizeList.add("480, 480");
@@ -110,15 +115,15 @@ public class ArtFrame extends JFrame{
   }
   
   private void makePreferencePanel(){
-    panel = new JPanel();
+    preferencePanel = new JPanel();
     //sizeBox
-    
-      
-      size[0] = "Defualt: 200 x 200"; size[1] = "320 x 320"; size[2] = "480 x 480"; size[3] = "800 x 600"; size[4] = "1280 x 720";size[5] = "Add specific size";
-      JTextField widthText = new JTextField(5), heightText = new JTextField(5);
-      JComboBox combo = new JComboBox(size);
       JRadioButton colorRGB = new JRadioButton("RGB-Color");
+      colorRGB.setActionCommand("RGB-Color");
+      colorRGB.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){color = true;}});
+      colorRGB.setSelected(true);
       JRadioButton grayScale = new JRadioButton("Grayscale");
+      grayScale.setActionCommand("Grayscale");
+      grayScale.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){color = false;}});  
   
     Box colorBox = Box.createVerticalBox();
     ButtonGroup colorGroup = new ButtonGroup();
@@ -127,8 +132,12 @@ public class ArtFrame extends JFrame{
     colorBox.add(colorRGB);
     colorBox.add(grayScale);
     colorBox.setBorder(BorderFactory. createTitledBorder("Color Option"));
-    addItem(panel, colorBox, 0, 3, 1, 1, GridBagConstraints.SOUTH);
+    addItem(preferencePanel, colorBox, 0, 3, 1, 1, GridBagConstraints.SOUTH);
     
+     JTextField widthText = new JTextField("320", 5), heightText = new JTextField("320", 5);
+     this.width = Integer.parseInt(widthText.getText()); 
+     this.height = Integer.parseInt(heightText.getText());
+      
     Box sizeBox = Box.createHorizontalBox();
     label = new JLabel("Width: ");
     sizeBox.add(label);
@@ -136,24 +145,23 @@ public class ArtFrame extends JFrame{
     label = new JLabel("  Height: ");
     sizeBox.add(label);
     sizeBox.add(heightText);
-    sizeBox.add(combo);
     widthText.setEnabled(true);
     sizeBox.setBorder(BorderFactory.createTitledBorder("Size"));
-    addItem(panel, sizeBox, 1, 3, 1, 1, GridBagConstraints.NORTH); 
+    addItem(preferencePanel, sizeBox, 1, 3, 1, 1, GridBagConstraints.NORTH); 
     
     Box buttonBox = Box.createVerticalBox();
     button = new JButton("Generate");
     buttonBox.add(button);
-    button.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){generate();}});
+    button.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){generate(width, height);}});
     buttonBox.add(Box.createVerticalStrut(0));
-    button = new JButton("Default");
     buttonBox.add(button);
     buttonBox.add(Box.createVerticalStrut(0));
     button = new JButton("Cancle");
+    button.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){cancle();}});
     buttonBox.add(button);
-    addItem(panel, buttonBox, 2, 3, 1, 1, GridBagConstraints.CENTER);
+    addItem(preferencePanel, buttonBox, 2, 3, 1, 1, GridBagConstraints.CENTER);
     
-    this.add(panel);
+    this.add(preferencePanel);
     this.pack();
     this.setVisible(true);
   }
@@ -184,6 +192,10 @@ public class ArtFrame extends JFrame{
     menu = new JMenu("File");
     menuBar.add(menu);
     
+    item = new JMenuItem("New");
+    item.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){newArt();}});
+    menu.add(item);
+    
     item = new JMenuItem("Save as");
     item.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){saveAs();}});
     menu.add(item);
@@ -191,11 +203,16 @@ public class ArtFrame extends JFrame{
     item = new JMenuItem("Quit");
     item.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){quit();}});
     menu.add(item);
-    
     menu = new JMenu("Tools");
     menuBar.add(menu);
+    
+    /*
     item = new JMenuItem("Preferences");
     item.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){randomPreference();}});
+    menu.add(item);
+    */
+    item = new JMenuItem("Functions");
+    item.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){printFunction();}});
     menu.add(item);
     
     menu = new JMenu("Help");
