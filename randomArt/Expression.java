@@ -76,10 +76,6 @@ public class Expression{
     }
   }
   
-  public double getValExp(double x, double y){
-    return Math.sin(Math.PI * x * Math.sin(Math.PI * y * Math.sin(Math.PI * y * (Math.sin(Math.PI * Math.sin(Math.PI * Math.sin(Math.PI * Math.sin(Math.PI * Math.cos(Math.PI * y))))) * Math.cos(Math.PI * Math.sin(Math.PI * Math.cos(Math.PI * avg(Math.sin(Math.PI * y), (x * x)))))))));
-  }
-  
   //random operation
   private void randomOperation(){
     int max;
@@ -125,5 +121,5 @@ public class Expression{
   public String getExpression(){
       return this.currentExp;
     }
-  
+    
 }

@@ -24,10 +24,11 @@ public class ArtPanel extends JPanel{
   }
   
   private void setExp(boolean color){
+      expression = "These functinos are displayed in Pre-fix format.\n          ASCMxyx = Avg(Sin(Cos(Mul(x,y))),x)\n";
       if(color){
-          expression = "R: " + randExpR.getExpression() + "\nG: " + randExpG.getExpression() + "\nB: " + randExpB.getExpression();
+          expression += "\nR: " + randExpR.getExpression() + "\nG: " + randExpG.getExpression() + "\nB: " + randExpB.getExpression();
       }else{
-          expression = "Gray: " + randExpR.getExpression();
+          expression += "\nGray: " + randExpR.getExpression();
       }
   }
   

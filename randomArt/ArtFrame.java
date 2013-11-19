@@ -1,3 +1,6 @@
+import java.awt.Toolkit;
+import java.awt.AWTKeyStroke;
+import javax.swing.KeyStroke;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -16,45 +19,42 @@ import javax.swing.Box;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.border.*;
+import javax.swing.ImageIcon;
 
-//import java.awt.border.*;
 import java.awt.event.*;//.ActionListener;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 import java.util.List;
 import java.util.ArrayList;
-//import java.io.File;
 
 public class ArtFrame extends JFrame{
   //field
-  private static JFileChooser fileChoose = new JFileChooser(System.getProperty("user.dir")); 
+  public static JTextField widthText;
+  public static JTextField heightText;
   
   private JFrame frame;
   private JButton button;
   private JLabel label;
-  private JTextField widthText;
-  private JTextField heightText;
   private JPanel preferencePanel;
   private JPanel thePanel;
   private ArtPanel artPanel;
-    
-  private int width, height;
+  
   private boolean color = true;
       
   
   //Constructor
   public ArtFrame(){
     newArt();
+    frame = new JFrame();
   }
   
   public void makePanel(int width, int height){
-    frame = new JFrame();
     frame.setTitle("RandomArt");
     
     makeMenuBar(frame);
     
-    thePanel = new ArtPanel(320, 320, color);   
+    thePanel = new ArtPanel(width, height, color);   
     artPanel = (ArtPanel)thePanel;
     frame.add(thePanel);
     
@@ -67,20 +67,14 @@ public class ArtFrame extends JFrame{
     makePanel(width, height);
     remove(frame);
   }
-  private void generate(){
-    generate(this.width, this.height);
-    }
+    
   private void cancle(){
-    //remove(preferencePanel);
     setVisible(false);
   }
   
   private void newArt(){
     makePreferencePanel();
   }
-  
-  private void saveAs(){}
-  
   private void quit(){
     //JOptionPane.showConfirmDialog(frame, "Are you sure?", "Quit RandomArt?",JOptionPane.INFORMATION_MESSAGE);
     int selection = JOptionPane.showConfirmDialog(frame, "Are you sure?", "Quit RandomArt?", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -91,7 +85,7 @@ public class ArtFrame extends JFrame{
   }
   
   private void about(){
-    JOptionPane.showMessageDialog(frame, "RandomArt\nBeta Version 2.2.27", "AboutRandomArt", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(frame, "RandomArt\nStable Version 2.2.27", "AboutRandomArt", JOptionPane.INFORMATION_MESSAGE);
   }
   
   private void printFunction(){
@@ -127,17 +121,17 @@ public class ArtFrame extends JFrame{
     colorBox.setBorder(BorderFactory. createTitledBorder("Color Option"));
     addItem(preferencePanel, colorBox, 0, 3, 1, 1, GridBagConstraints.SOUTH);
     
-     JTextField widthText = new JTextField("320", 5), heightText = new JTextField("320", 5);
-     this.width = Integer.parseInt(widthText.getText()); 
-     this.height = Integer.parseInt(heightText.getText());
+     widthText = new JTextField("320", 5); heightText = new JTextField("320", 5);
       
     Box sizeBox = Box.createHorizontalBox();
     label = new JLabel("Width: ");
     sizeBox.add(label);
     sizeBox.add(widthText);
+    widthText.setEditable(false);
     label = new JLabel("  Height: ");
     sizeBox.add(label);
     sizeBox.add(heightText);
+    heightText.setEditable(false);
     widthText.setEnabled(true);
     sizeBox.setBorder(BorderFactory.createTitledBorder("Size"));
     addItem(preferencePanel, sizeBox, 1, 3, 1, 1, GridBagConstraints.NORTH); 
@@ -145,7 +139,7 @@ public class ArtFrame extends JFrame{
     Box buttonBox = Box.createVerticalBox();
     button = new JButton("Generate");
     buttonBox.add(button);
-    button.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){generate(width, height);}});
+    button.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){generate(Integer.parseInt(widthText.getText()), Integer.parseInt(heightText.getText()));}});
     buttonBox.add(Box.createVerticalStrut(0));
     buttonBox.add(button);
     buttonBox.add(Box.createVerticalStrut(0));
@@ -175,6 +169,8 @@ public class ArtFrame extends JFrame{
   }
   
   private void makeMenuBar(JFrame frame){
+    final int SHORTCUT_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+      
     JMenuBar menuBar = new JMenuBar();
     frame.setJMenuBar(menuBar);
     
@@ -185,16 +181,13 @@ public class ArtFrame extends JFrame{
     menu = new JMenu("File");
     menuBar.add(menu);
     
-    item = new JMenuItem("New");
+    item = new JMenuItem("New...");
     item.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){newArt();}});
+    item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, SHORTCUT_MASK));
     menu.add(item);
-    
-    item = new JMenuItem("Save as");
-    item.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){saveAs();}});
-    menu.add(item);
-    
-    item = new JMenuItem("Quit");
+    item = new JMenuItem("Quit...");
     item.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){quit();}});
+    item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, SHORTCUT_MASK));
     menu.add(item);
     menu = new JMenu("Tools");
     menuBar.add(menu);
@@ -204,15 +197,17 @@ public class ArtFrame extends JFrame{
     item.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){randomPreference();}});
     menu.add(item);
     */
-    item = new JMenuItem("Functions");
+    item = new JMenuItem("Functions...");
     item.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){printFunction();}});
+    item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, SHORTCUT_MASK));
     menu.add(item);
     
     menu = new JMenu("Help");
     menuBar.add(menu);
     
-    item = new JMenuItem("About RandomArt");
+    item = new JMenuItem("About RandomArt...");
     item.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e){about();}});
+    item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
     menu.add(item);
   }
 }
