@@ -37,6 +37,7 @@ public class ArtFrame extends JFrame{
   private JTextField heightText;
   private JPanel preferencePanel;
   private JPanel thePanel;
+  private ArtPanel artPanel;
     
   private int width, height;
   private boolean color = true;
@@ -53,7 +54,8 @@ public class ArtFrame extends JFrame{
     
     makeMenuBar(frame);
     
-    thePanel = new ArtPanel(320, 320, color);
+    thePanel = new ArtPanel(320, 320, color);   
+    artPanel = (ArtPanel)thePanel;
     frame.add(thePanel);
     
     frame.pack();
@@ -91,7 +93,10 @@ public class ArtFrame extends JFrame{
   private void about(){
     JOptionPane.showMessageDialog(frame, "RandomArt\nBeta Version 2.2.27", "AboutRandomArt", JOptionPane.INFORMATION_MESSAGE);
   }
-  private void printFunction(){}
+  
+  private void printFunction(){
+    JOptionPane.showMessageDialog(frame, artPanel.getExp(),"RandomArt-Functions", JOptionPane.INFORMATION_MESSAGE);
+  }
   
   private boolean getColor(){
       return this.color;
@@ -100,18 +105,6 @@ public class ArtFrame extends JFrame{
   private void setTextFieldEnabled(boolean status){
     widthText.setEnabled(status);
     heightText.setEnabled(status);
-  }
-  
-  private List<String> createSizeList(){
-    List<String> sizeList = new ArrayList<String>();
-    sizeList.add("Default: 200 x 200");
-    sizeList.add("320, 320");
-    sizeList.add("480, 480");
-    sizeList.add("800, 600");
-    sizeList.add("1280, 720");
-    sizeList.add("Add specific size");
-    
-    return sizeList;
   }
   
   private void makePreferencePanel(){

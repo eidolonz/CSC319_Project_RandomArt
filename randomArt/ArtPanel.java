@@ -11,14 +11,28 @@ public class ArtPanel extends JPanel{
   private Expression randExpG = new Expression(27); 
   private Expression randExpB = new Expression(13); 
   private boolean check = false;
+  private String expression;
   
   public ArtPanel(int width, int height, boolean color){
     setPreferredSize(new Dimension(width, height));
     createExpreesion(color);
+    setExp(color);
 }
 
   public ArtPanel(){
     this(320, 320, true);
+  }
+  
+  private void setExp(boolean color){
+      if(color){
+          expression = "R: " + randExpR.getExpression() + "\nG: " + randExpG.getExpression() + "\nB: " + randExpB.getExpression();
+      }else{
+          expression = "Gray: " + randExpR.getExpression();
+      }
+  }
+  
+  public String getExp(){
+      return expression;
   }
   
   private void createExpreesion(boolean color){
@@ -27,9 +41,6 @@ public class ArtPanel extends JPanel{
               randExpR.createExpression();
               randExpG.createExpression();
               randExpB.createExpression();
-              //System.out.println("R: " + randExpR.currentExp);
-              //System.out.println("G: " + randExpG.currentExp);
-              //System.out.println("B: " + randExpB.currentExp);
               this.check = true;
           }else{
               randExpR.createExpression();

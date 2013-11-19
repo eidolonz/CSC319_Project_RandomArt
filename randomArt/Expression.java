@@ -121,23 +121,9 @@ public class Expression{
           return this.y;
       }
   }
-  public double getRExp(double x, double y){
-    return avg(Math.sin(Math.cos(Math.sin(x) * avg(Math.cos(x), Math.cos(y))) * Math.PI), x * avg(Math.sin(Math.PI * x) , x * Math.sin(Math.PI * y * Math.sin(Math.PI * y * (Math.sin(Math.PI * Math.sin(Math.PI * Math.sin(Math.PI * Math.sin(Math.PI * Math.cos(Math.PI * y))))) * Math.cos(Math.PI * Math.sin(Math.PI * Math.cos(Math.PI * avg(Math.sin(Math.PI * y) ,Math.sin(Math.PI * avg(Math.sin(x), (Math.PI * y) )))))))))));
-  }
-  public double getGExp(double x, double y){
-    return Math.sin(Math.PI * x * Math.sin(Math.PI * y * Math.sin(Math.PI * y * (Math.sin(Math.PI * Math.sin(Math.PI * Math.sin(Math.PI * Math.sin(Math.PI * Math.cos(Math.PI * y))))) * Math.cos(Math.PI * Math.sin(Math.PI * Math.cos(Math.PI * avg(Math.sin(Math.PI * y), (x * x)))))))));
-  }
-  public double getBExp(double x, double y){
-    return Math.sin(Math.PI * x * Math.sin(Math.PI * y * Math.sin(Math.PI * y * (Math.sin(Math.PI * Math.sin(Math.PI * Math.sin(Math.PI * Math.sin(Math.PI * Math.cos(Math.PI * y))))) * Math.cos(Math.PI * Math.sin(Math.PI * Math.cos(Math.PI * avg(Math.sin(Math.PI * y), (x * x)))))))));
-  }
   
-  public double getRed(){
-    return 0;
-  }
-  public double getGreen(){
-    return 0;
-  }
-  public double getBlue(){
-    return 0;
-  }
+  public String getExpression(){
+      return this.currentExp;
+    }
+  
 }
